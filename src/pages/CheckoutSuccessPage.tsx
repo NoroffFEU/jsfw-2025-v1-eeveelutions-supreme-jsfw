@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router';
-import { Toast } from '../components/ui/Toast';
 import { SuccessIcon } from '../components/ui/SuccessIcon';
+import { useCart } from '../hooks/useCart';
 
 export function CheckoutSuccessPage() {
-  const [showToast, setShowToast] = useState(true);
+  const { items, clearCart } = useCart();
 
   useEffect(() => {
-    localStorage.removeItem('cart');
-  }, []);
+    if (items.length > 0) {
+      clearCart();
+    }
+  }, [clearCart, items.length]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
@@ -32,14 +34,6 @@ export function CheckoutSuccessPage() {
           Continue Shopping
         </Link>
       </div>
-
-      {showToast && (
-        <Toast
-          message="Checkout successful!"
-          type="success"
-          onClose={() => setShowToast(false)}
-        />
-      )}
     </div>
   );
 }

@@ -1,0 +1,2 @@
+export { CartProvider } from './CartProvider';
+

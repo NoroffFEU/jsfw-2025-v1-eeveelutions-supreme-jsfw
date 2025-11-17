@@ -1,10 +1,19 @@
 import type { Product } from '../../types/product';
+import { useCart } from '../../hooks/useCart';
+import { useToast } from '../../context/ToastContext';
 
 export function ProductCard({ product }: { product: Product }) {
+  const { addItem } = useCart();
+  const { showToast } = useToast();
   const hasDiscount = product.discountedPrice < product.price;
   const discountPercentage = hasDiscount
     ? Math.round(((product.price - product.discountedPrice) / product.price) * 100)
     : 0;
+
+  const handleAddToCart = () => {
+    addItem(product);
+    showToast({ message: `${product.title} added to cart`, type: 'success' });
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
@@ -22,12 +31,12 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col gap-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-3">
           {product.title}
         </h3>
 
-        <div className="flex items-center mb-3">
+        <div className="flex items-center">
           <svg
             className="w-5 h-5 text-yellow-400 fill-current"
             viewBox="0 0 20 20"
@@ -53,6 +62,14 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
