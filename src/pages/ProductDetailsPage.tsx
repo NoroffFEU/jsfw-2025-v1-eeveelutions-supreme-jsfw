@@ -3,7 +3,8 @@ import { useParams, Link } from 'react-router';
 import type { Product } from '../types/product';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
-import { Toast } from '../components/ui/Toast';
+import { useCart } from '../hooks/useCart';
+import { useToast } from '../context/ToastContext';
 
 const API_URL = 'https://v2.api.noroff.dev/online-shop';
 
@@ -11,17 +12,13 @@ type RouteParams = {
     id: string;
 };
 
-type CartItem = {
-    id: string;
-    quantity: number;
-};
-
 export function ProductDetailsPage() {
     const { id } = useParams<RouteParams>();
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [toast, setToast] = useState<string | null>(null);
+    const { addItem } = useCart();
+    const { showToast } = useToast();
 
     useEffect(() => {
         if (!id) {
@@ -54,30 +51,12 @@ export function ProductDetailsPage() {
     }, [id]);
 
     function handleAddToCart() {
-        if (!product) return;
-
-        const storedCart = localStorage.getItem('cart');
-        let cart: CartItem[] = [];
-
-        if (storedCart) {
-        try {
-            cart = JSON.parse(storedCart);
-        } catch {
-            cart = [];
-        }
+        if (!product) {
+            return;
         }
 
-        const existingIndex = cart.findIndex((item) => item.id === product.id);
-
-        if (existingIndex >= 0) {
-        cart[existingIndex].quantity += 1;
-        } else {
-        cart.push({ id: product.id, quantity: 1 });
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        setToast('Added to cart');
+        addItem(product);
+        showToast({ message: `${product.title} added to cart`, type: 'success' });
     }
 
     if (loading) {
@@ -219,14 +198,6 @@ export function ProductDetailsPage() {
             </div>
             </div>
         </main>
-
-            {toast && (
-                <Toast
-                message={toast}
-                type="success"
-                onClose={() => setToast(null)}
-                />
-            )}
         </div>
     );
 }
