@@ -167,7 +167,7 @@ export function ProductDetailsPage() {
                 <button
                 type="button"
                 onClick={handleAddToCart}
-                className="mt-4 inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 transition-colors"
+                className="mt-4 inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 transition-colors hover:cursor-pointer"
                 >
                 Add to cart
                 </button>
