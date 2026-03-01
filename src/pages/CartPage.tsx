@@ -80,17 +80,19 @@ export function CartPage() {
               return (
                 <div key={item.product.id} className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <div className="w-full sm:w-32 sm:shrink-0">
+                    <Link to={`/product/${item.product.id}`} className="w-full sm:w-32 sm:shrink-0 hover:opacity-80 transition-opacity">
                       <img
                         src={item.product.image.url}
                         alt={item.product.image.alt || item.product.title}
                         className="w-full h-32 object-cover rounded-md"
                       />
-                    </div>
+                    </Link>
 
                     <div className="flex-1 space-y-3">
                       <div>
-                        <h2 className="text-xl font-semibold text-gray-900">{item.product.title}</h2>
+                        <Link to={`/product/${item.product.id}`} className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                          {item.product.title}
+                        </Link>
                         <div className="flex items-center gap-3 mt-1">
                           <span className="text-lg font-semibold text-gray-900">{formatPrice(unitPrice)}</span>
                           {hasDiscount && (
