@@ -104,7 +104,7 @@ export function CartPage() {
                           <button
                             type="button"
                             onClick={() => handleDecrease(item.product.id, item.quantity, item.product.title)}
-                            className="px-3 py-2 text-gray-600 hover:text-gray-900"
+                            className="px-3 py-2 text-gray-600 hover:text-gray-900 hover:cursor-pointer"
                             aria-label={`Decrease quantity of ${item.product.title}`}
                           >
                             −
@@ -113,7 +113,7 @@ export function CartPage() {
                           <button
                             type="button"
                             onClick={() => handleIncrease(item.product.id, item.quantity)}
-                            className="px-3 py-2 text-gray-600 hover:text-gray-900"
+                            className="px-3 py-2 text-gray-600 hover:text-gray-900 hover:cursor-pointer"
                             aria-label={`Increase quantity of ${item.product.title}`}
                           >
                             +
@@ -123,7 +123,7 @@ export function CartPage() {
                         <button
                           type="button"
                           onClick={() => handleRemove(item.product.id, item.product.title)}
-                          className="text-sm font-medium text-red-600 hover:text-red-700"
+                          className="text-sm font-medium text-red-600 hover:text-red-700 hover:cursor-pointer"
                         >
                           Remove
                         </button>
@@ -160,7 +160,7 @@ export function CartPage() {
               className={`mt-6 w-full inline-flex items-center justify-center px-4 py-3 rounded-lg font-semibold transition-colors ${
                 checkoutDisabled
                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-blue-600 text-white hover:bg-blue-700 hover:cursor-pointer'
               }`}
             >
               Checkout

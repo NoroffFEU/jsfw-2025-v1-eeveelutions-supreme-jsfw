@@ -139,7 +139,7 @@ export function ContactForm({ onSubmit }: { onSubmit: (data: ContactFormData) =>
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+        className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 hover:cursor-pointer transition-colors"
       >
         Submit
       </button>

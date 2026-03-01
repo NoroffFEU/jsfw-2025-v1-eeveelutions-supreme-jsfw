@@ -85,7 +85,7 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleAddToCart}
-          className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+          className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 hover:cursor-pointer transition-colors"
         >
           Add to Cart
         </button>
